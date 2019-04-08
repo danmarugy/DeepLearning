@@ -1,4 +1,4 @@
-import os
+import os, sys
 
 folder = './setting/'
 if not os.path.exists(folder):
@@ -10,19 +10,60 @@ for message in range(1,20):
 
 print('done')
 f.close()
+class exam_file_nw_test:
 
+    def __init__(self):
+        print('초기화')
 
-def __init__(self):
+    def _createDir(folder):
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+            print(folder+"폴더가 생성되었습니다.")
+            return True
+        else:
+            return False
 
-def _createDir():
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-def _delDir():
-def _createFile():
-def _readFile():
-def _writeFile():
-def _addFile():
-def _delFile():
+    def _delDir(folder):
+        if os.path.exists(folder):
+            os.rmdir(folder)
+
+    def _createFile(folder, filename):
+        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        if(folder_exist_flag == True):
+            f = open(folder+filename+".txt", 'w')
+            print(folder+"에 " + filename+ " 파일이 생성되었습니다.")
+            f.close()
+
+    def _readFile(folder, filename):
+        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        if (folder_exist_flag == True):
+            f = open(folder+filename+".txt", 'r')
+            print("파일을 불러왔습니다.")
+            for file_read in f:
+                print(file_read)
+                f.close()
+            else:
+                print("읽어올 내용이 없습니다.")
+                f.close()
+
+    def _writeFile(folder, filename, message):
+        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        if (folder_exist_flag == True):
+            f = open(folder + filename + ".txt", 'a')
+            print("파일을 불러왔습니다.")
+            for file_write in message:
+                data = file_write
+                f.write(data)
+
+    def _addFile(folder, filename):
+        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        if(folder_exist_flag == True):
+            print("작업중")
+
+    def _delFile():
+        print("파일 삭제")
+
 
 if __name__ =='__main__':
     print("start")
+    exam_file_nw_test()
