@@ -55,13 +55,11 @@ class exam_file_nw_test:
                 data = file_write
                 f.write(data)
 
-    def _addFile(folder, filename):
+    def _delFile(floder, filename):
         folder_exist_flag = exam_file_nw_test._createDir(folder)
-        if(folder_exist_flag == True):
-            print("작업중")
-
-    def _delFile():
-        print("파일 삭제")
+        if (folder_exist_flag == True):
+            if os.path.isfile(folder+filename):
+                os.remove(folder+filename)
 
 
 if __name__ =='__main__':
