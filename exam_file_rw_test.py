@@ -61,6 +61,11 @@ class exam_file_nw_test:
             if os.path.isfile(folder+filename):
                 os.remove(folder+filename)
 
+        try:
+            print("이상 없음")
+        except Exception as e:
+            print(e)
+
 
 if __name__ =='__main__':
     print("start")
