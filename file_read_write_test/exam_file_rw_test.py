@@ -1,4 +1,6 @@
 import os, sys
+import json
+from collections import OrderedDict
 
 '''
 folder = './setting/'
@@ -12,40 +14,57 @@ print('done')
 f.close()
 '''
 
-class exam_file_rw_test:
+class FileManagement:
 
-    create_folder_list = []
-    '''efnt = exam_file_nw_test()'''
+    dir_data = OrderedDict()
 
     def __init__(self):
         print('초기화')
-        '''exam_file_rw_test._menu_list(self)'''
-        '''efnt._menu_list(self)'''
+        os.chdir(os.pardir)
+        if __name__ == '__main__':
+            self.menu_list()
 
-    def _createDir(folder):
+
+    def _createDir(self, folder):
+
         if not os.path.exists(folder):
             os.makedirs(folder)
             print(folder+"폴더가 생성되었습니다.")
+            self._savelistDir(folder)
             return True
         else:
             print(folder +"는 이미 생성되어있습니다.")
             return False
 
-    def _delDir(folder):
+    def _delDir(self, folder):
         if os.path.exists(folder):
             os.rmdir(folder)
 
     def _listDir(self):
         print("저장된 폴더리스트를 불러옵니다")
 
-    def _createFile(folder, filename):
-        folder_exist_flag = exam_file_rw_test._createDir(folder)
+    def _savelistDir(self, folder):
+        setfolderlist = "list"
+        if not os.path.exists(setfolderlist):
+            os.makedirs(setfolderlist)
+            self.dir_data["Name"] = folder
+            print(self.dir_data["Name"])
+            with open(setfolderlist+'/listDir.json', 'w', encoding="utf-8") as make_file:
+                json.dump(self.dir_data, make_file, ensure_ascii=False, indent="\t")
+
+    def _loadlistDir(self):
+        print("xxxxxx")
+
+    def _createFile(self, folder, filename):
+        folder_exist_flag = self._createDir(folder)
         if(folder_exist_flag == True):
             f = open(folder+filename+".txt", 'w')
             print(folder+"에 " + filename+ " 파일이 생성되었습니다.")
             f.close()
-    def _readFile(folder, filename):
-        folder_exist_flag = exam_file_rw_test._createDir(folder)
+
+
+    def _readFile(self, folder, filename):
+        folder_exist_flag = FileManagement._createDir(folder)
         if (folder_exist_flag == True):
             f = open(folder+filename+".txt", 'r')
             print("파일을 불러왔습니다.")
@@ -55,8 +74,8 @@ class exam_file_rw_test:
             else:
                 print("읽어올 내용이 없습니다.")
                 f.close()
-    def _writeFile(folder, filename, message):
-        folder_exist_flag = exam_file_rw_test._createDir(folder)
+    def _writeFile(self, folder, filename, message):
+        folder_exist_flag = FileManagement._createDir(folder)
         if (folder_exist_flag == True):
             f = open(folder + filename + ".txt", 'a')
             print("파일을 불러왔습니다.")
@@ -64,10 +83,10 @@ class exam_file_rw_test:
                 data = file_write
                 f.write(data)
 
-    def _delFile(floder, filename):
+    def _delFile(self, floder, filename):
         print("hello")
-    def _delFile(folder, filename):
-        folder_exist_flag = exam_file_rw_test._createDir(folder)
+    def _delFile(self, folder, filename):
+        folder_exist_flag = FileManagement._createDir(folder)
         if (folder_exist_flag == True):
             if os.path.isfile(folder+filename):
                 os.remove(folder+filename)
@@ -78,19 +97,21 @@ class exam_file_rw_test:
 
     def menu_list(self):
         flag = True
-        print("1 : 폴더생성 2: 폴더삭제 3: 생성된 폴더리스트 4: 파일생성 5: 파일 쓰기 6: 파일 읽기 7: 파일 지우기 0 : 종료")
+        '''print("1 : 폴더생성 2: 폴더삭제 3: 생성된 폴더리스트 4: 파일생성 5: 파일 쓰기 6: 파일 읽기 7: 파일 지우기 0 : 종료")'''
         while(flag):
             try:
+                print("1 : 폴더생성 2: 폴더삭제 3: 생성된 폴더리스트 4: 파일생성 5: 파일 쓰기 6: 파일 읽기 7: 파일 지우기 0 : 종료")
                 select_menu =  int(input('원하시는 작업을 선택해주세요.'))
             except ValueError as ve:
                 print("지정된 숫자를 입력바랍니다.")
-            print(type(select_menu))
+                continue
+            '''print(type(select_menu))'''
             if(select_menu == 1):
                 folder_name = input("생성할 폴더명을 입력 : ")
-                exam_file_rw_test._createDir(folder_name)
-                exam_file_rw_test.create_folder_list.append(folder_name)
+                self._createDir(folder_name)
+                '''self.create_folder_list.append(folder_name)'''
             elif(select_menu == 3):
-                exam_file_rw_test._listDir()
+                self._listDir()
             elif(select_menu == 0):
                 print("프로그램을 종료합니다.")
                 flag = False
@@ -99,4 +120,4 @@ class exam_file_rw_test:
 
 if __name__ =='__main__':
     print("start")
-    exam_file_rw_test()
+    FileManagement()
