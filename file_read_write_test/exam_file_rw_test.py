@@ -52,6 +52,14 @@ class FileManagement:
             with open(setfolderlist+'/listDir.json', 'w', encoding="utf-8") as make_file:
                 json.dump(self.dir_data, make_file, ensure_ascii=False, indent="\t")
 
+        else:
+            os.makedirs(setfolderlist)
+            self.dir_data["Name"] = folder
+            print(self.dir_data["Name"])
+            with open(setfolderlist + '/listDir.json', 'a', encoding="utf-8") as make_file:
+                json.dump(self.dir_data, make_file, ensure_ascii=False, indent="\t")
+
+
     def _loadlistDir(self):
         print("xxxxxx")
 
@@ -85,6 +93,8 @@ class FileManagement:
 
     def _delFile(self, floder, filename):
         print("hello")
+
+
     def _delFile(self, folder, filename):
         folder_exist_flag = FileManagement._createDir(folder)
         if (folder_exist_flag == True):
