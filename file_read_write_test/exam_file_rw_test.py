@@ -12,14 +12,14 @@ print('done')
 f.close()
 '''
 
-class exam_file_nw_test:
+class exam_file_rw_test:
 
     create_folder_list = []
     '''efnt = exam_file_nw_test()'''
 
     def __init__(self):
         print('초기화')
-        exam_file_nw_test._menu_list(self)
+        '''exam_file_rw_test._menu_list(self)'''
         '''efnt._menu_list(self)'''
 
     def _createDir(folder):
@@ -35,17 +35,17 @@ class exam_file_nw_test:
         if os.path.exists(folder):
             os.rmdir(folder)
 
-    def _listDir():
+    def _listDir(self):
         print("저장된 폴더리스트를 불러옵니다")
 
     def _createFile(folder, filename):
-        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        folder_exist_flag = exam_file_rw_test._createDir(folder)
         if(folder_exist_flag == True):
             f = open(folder+filename+".txt", 'w')
             print(folder+"에 " + filename+ " 파일이 생성되었습니다.")
             f.close()
     def _readFile(folder, filename):
-        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        folder_exist_flag = exam_file_rw_test._createDir(folder)
         if (folder_exist_flag == True):
             f = open(folder+filename+".txt", 'r')
             print("파일을 불러왔습니다.")
@@ -56,7 +56,7 @@ class exam_file_nw_test:
                 print("읽어올 내용이 없습니다.")
                 f.close()
     def _writeFile(folder, filename, message):
-        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        folder_exist_flag = exam_file_rw_test._createDir(folder)
         if (folder_exist_flag == True):
             f = open(folder + filename + ".txt", 'a')
             print("파일을 불러왔습니다.")
@@ -65,8 +65,9 @@ class exam_file_nw_test:
                 f.write(data)
 
     def _delFile(floder, filename):
+        print("hello")
     def _delFile(folder, filename):
-        folder_exist_flag = exam_file_nw_test._createDir(folder)
+        folder_exist_flag = exam_file_rw_test._createDir(folder)
         if (folder_exist_flag == True):
             if os.path.isfile(folder+filename):
                 os.remove(folder+filename)
@@ -75,7 +76,7 @@ class exam_file_nw_test:
         except Exception as e:
             print(e)
 
-    def _menu_list(self):
+    def menu_list(self):
         flag = True
         print("1 : 폴더생성 2: 폴더삭제 3: 생성된 폴더리스트 4: 파일생성 5: 파일 쓰기 6: 파일 읽기 7: 파일 지우기 0 : 종료")
         while(flag):
@@ -86,10 +87,10 @@ class exam_file_nw_test:
             print(type(select_menu))
             if(select_menu == 1):
                 folder_name = input("생성할 폴더명을 입력 : ")
-                exam_file_nw_test._createDir(folder_name)
-                exam_file_nw_test.create_folder_list.append(folder_name)
+                exam_file_rw_test._createDir(folder_name)
+                exam_file_rw_test.create_folder_list.append(folder_name)
             elif(select_menu == 3):
-                exam_file_nw_test._listDir()
+                exam_file_rw_test._listDir()
             elif(select_menu == 0):
                 print("프로그램을 종료합니다.")
                 flag = False
@@ -98,4 +99,4 @@ class exam_file_nw_test:
 
 if __name__ =='__main__':
     print("start")
-    exam_file_nw_test()
+    exam_file_rw_test()
