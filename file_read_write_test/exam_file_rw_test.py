@@ -1,7 +1,7 @@
 import os, sys
 import json
 from collections import OrderedDict
-
+import struct
 '''
 folder = './setting/'
 if not os.path.exists(folder):
@@ -44,7 +44,7 @@ class FileManagement:
         print("저장된 폴더리스트를 불러옵니다")
 
     def _savelistDir(self, folder):
-        setfolderlist = "list"
+        '''setfolderlist = "list"
         if not os.path.exists(setfolderlist):
             os.makedirs(setfolderlist)
             self.dir_data["Name"] = folder
@@ -57,8 +57,19 @@ class FileManagement:
             self.dir_data["Name"] = folder
             print(self.dir_data["Name"])
             with open(setfolderlist + '/listDir.json', 'a', encoding="utf-8") as make_file:
-                json.dump(self.dir_data, make_file, ensure_ascii=False, indent="\t")
+                json.dump(self.dir_data, make_file, ensure_ascii=False, indent="\t")'''
+        with open('dir_list.dat', 'wb') as d:
+            # windows의 한글 encoding 타입은 utf-8, euc-kr, euc-kr에서 진화한 cp949방식이 존재한다.
+            # UTF-8은 유니코드를 위한 가변 길이 문자 인코딩 방식
+            # data = bytes(folder, encoding='utf-8') #binary type으로 저장하기 위해서는 인코딩 타입을 지정해줘야한다.
+            data = folder.encode('utf-8')
+            print(type(data))
+            print(data)
+            d.write(data)
 
+        with open('dir_list.dat', 'rb') as d:
+            data = d.read().decode('utf-8')
+            print(data)
 
     def _loadlistDir(self):
         print("xxxxxx")
@@ -129,5 +140,5 @@ class FileManagement:
 
 
 if __name__ =='__main__':
-    print("start")
+    print('현재 실행되는 파일은 file_read_write_test.exam_file_rw_test.py입니다.')
     FileManagement()
