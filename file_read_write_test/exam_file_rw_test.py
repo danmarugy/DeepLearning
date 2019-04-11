@@ -21,6 +21,9 @@ class exam_file_rw_test:
         print('초기화')
         '''exam_file_rw_test._menu_list(self)'''
         '''efnt._menu_list(self)'''
+        e = self
+        print(type(e))
+        e.menu_list()
 
     def _createDir(folder):
         if not os.path.exists(folder):
@@ -77,6 +80,7 @@ class exam_file_rw_test:
             print(e)
 
     def menu_list(self):
+        print(e)
         flag = True
         print("1 : 폴더생성 2: 폴더삭제 3: 생성된 폴더리스트 4: 파일생성 5: 파일 쓰기 6: 파일 읽기 7: 파일 지우기 0 : 종료")
         while(flag):
@@ -100,3 +104,7 @@ class exam_file_rw_test:
 if __name__ =='__main__':
     print("start")
     exam_file_rw_test()
+'''
+else:
+    e =exam_file_rw_test()
+'''
