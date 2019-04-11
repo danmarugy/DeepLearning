@@ -21,6 +21,8 @@ class FileManagement:
     def __init__(self):
         print('초기화')
         os.chdir(os.pardir)
+        self._createDir("Resources")
+        # os.chdir(os.getcwd()+"\\Resources")
         if __name__ == '__main__':
             self.menu_list()
 
