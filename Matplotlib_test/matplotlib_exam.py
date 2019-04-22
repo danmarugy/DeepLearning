@@ -10,5 +10,5 @@ y1 = np.sin(x)
 y2 = np.cos(x)
 
 # 그래프 그리기
-plt.plot(x, y1, )
+plt.plot(x, y1, y2)
 plt.plot()
