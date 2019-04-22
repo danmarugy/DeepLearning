@@ -1,6 +1,8 @@
 import sys, os
 sys.path.append(os.pardir)
+import numpy as np
 from deep_learning_from_scratch_master.dataset.mnist import load_mnist
+from PIL import Image
 
 # 처음 한 번은 몇 분 정도 걸린다.
 # x_train : 훈련 레이블 t_train : 훈련 레이블), (x_test : 시험 이미지 t_test : 시험 레이블)
@@ -11,9 +13,25 @@ from deep_learning_from_scratch_master.dataset.mnist import load_mnist
 # one_hot_label이 False일 경우 7,2와 같이 숫자 형태의 레이블을 저장
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False)
 
-
 # 각 데이터의 형상 출력
 print(x_train.shape) # (60000, 784)
 print(t_train.shape) # (60000,)
 print(x_test.shape) # (10000, 784)
 print(t_test.shape) # (10000,)
+
+print(len(x_train))
+
+
+def img_show(img):
+    pil_img = Image.fromarray(np.uint8(img))
+    pil_img.show()
+
+img = x_train[0]
+label = t_train[0]
+print(label) # 5
+
+print(img.shape) # (784,)
+img = img.reshape(28,28)
+print(img.shape) # (28, 28)
+
+img_show(img)
