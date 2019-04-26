@@ -8,8 +8,10 @@ import gzip
 import pickle
 import os
 import numpy as np
+import logging as log
 
 
+logger = log.getLogger(__name__)
 url_base = 'http://yann.lecun.com/exdb/mnist/'
 key_file = {
     'train_img':'train-images-idx3-ubyte.gz',
@@ -70,6 +72,12 @@ def _convert_numpy():
     dataset['train_label'] = _load_label(key_file['train_label'])
     dataset['test_img'] = _load_img(key_file['test_img'])
     dataset['test_label'] = _load_label(key_file['test_label'])
+    print('dataset : ',dataset,'\n')
+    print("dataset['train_img'] : ",dataset['train_img'],'\n')
+    print("dataset['train_label'] : ", dataset['train_img'],'\n')
+    print("dataset['test_img'] : ", dataset['train_img'],'\n')
+    print("dataset['test_label'] : ", dataset['train_img'],'\n')
+    logger.info(dataset)
 
     return dataset
 
@@ -79,6 +87,15 @@ def init_mnist():
     print("Creating pickle file ...")
     with open(save_file, 'wb') as f:
         pickle.dump(dataset, f, -1)
+        # pickle.dump의 인수중 -1은 fix_imports이며 fix_imports 가 참이고 protocol 이 3보다 작으면, pickle은
+        # 새로운 파이썬 3 이름을 파이썬 2에서 사용된 이전 모듈 이름에 매핑하려고 시도하여, 파이썬 2에서 피클 데이터 스트림을 읽을 수 있도록 합니다.
+
+    print(f)
+
+    with open(save_file, 'rb') as r:
+        data = pickle.load(r)
+
+    print(data)
     print("Done!")
 
 def _change_one_hot_label(X):
